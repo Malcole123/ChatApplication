@@ -15,11 +15,11 @@ export default {
 
 <style scoped>
     .sml{
-      height:347px;
+      min-height:347px;
     }
 
     .lg{
-      height:80vh;
+      min-height:87vh;
     }
 
     .card-head{

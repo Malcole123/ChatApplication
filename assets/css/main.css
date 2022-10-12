@@ -2,12 +2,15 @@
   --prim-bg:#EAEAEA;
   --app-prim:#1A66FF;
   --prim-curve:10px;
+  --head-font:'Manrope', sans-serif;
+  --body-font:'Poppins', sans-serif;
 }
 
 *{
   box-sizing: border-box;
   padding:0;
   margin:0;
+  font-family: 'Manrope', sans-serif;
 }
 
 body{
@@ -29,6 +32,19 @@ body{
   padding:20px 10px;
 }
 
+.list-card{
+  height:134px;
+  padding:10px 0px;
+  height:fit-content;
+  font-family:var(--body-font)
+}
+
+
+.scrl-container{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
 @media(max-width:768px){
     .main-row{
