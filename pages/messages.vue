@@ -1,7 +1,7 @@
 <template>
   <MainWrapper>
       <div class="row w-100 main-row g-0 gap-0">
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-5 col-md-12 col-sm-12">
           <div class="w-100 main_column">
               <div class="search-wrapper">
                 <input type="text" name="search" id="search-input-1" class="w-100 search-input" placeholder="Search messages, calls, friends...">
@@ -10,7 +10,7 @@
                 <MainCard :size="'sml'" :heading="'Groups'">
                   <div class="w-100 sml-list">
                       <div class="scrl-container app-list">
-                        <ListCard v-for="n in 3" :key="'test' + n">
+                        <ListCard v-for="n in 3" :key="'test' + n" @click="toggleChat">
                         <div class="w-100 chat-actions">
                           <DateDisplay :date="1665590154" :format="'relative'"/>
                           <ReadReceipt state='active'/>
@@ -36,15 +36,38 @@
 
           </div>
         </div>
-        <div class="col-lg-8 col-md-12 col-sm-12">
-          <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
-          <MainCard :size="'lg'" :heading="'Friends'">
-            <div class="w-100 lrg-list">
-                      <div class="scrl-container app-list">
-
-                      </div>
-
-            </div>
+        <div :class="state.class.messageClass">
+          <MainCard :size="'lg stretch'" :heading="'Chat'" :stdalone="true">
+              <div class="w-100 message-area-head">
+                <div class="message-profile-img">
+                    <ProfileImage :height="'4em'" :width="'4em'"/>
+                </div>
+                <div class="message-description">
+                  <h4 class="message-area-heading">Test Name</h4>
+                </div>
+                <div class="message-options chat-actions chat-actions-row">
+                  <CallType :type="'voice'" :width="28" :height="20"/>
+                  <CallType :type="'video'" :width="28" :height="20"/>
+                  <SeeMore :width="4" :height="20"/>
+                </div>
+              </div>
+              <div class="w-100 message-area-body">
+                  <div class="conversation-wrapper">
+                    <div class="w-100 pt-3 pb-3" v-for="n in 44" :key="'test' + n">
+                          <MessageBubble :tst="n" :msg="'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque voluptates molestiae et animi iste, minima, doloremque sint blanditiis aliquam nam odit repudiandae, illo quidem fugiat consequatur magni culpa quos. Sint.'"/>
+                    </div>
+                  </div>
+              </div>
+              <div class="w-100 message-area-footer">
+                <div class="row h-100 g-2">
+                  <div class="col-10 d-flex flex-column align-items-center justify-content-center">
+                    <textarea name="userMessage" id="messageInput" class="message-input w-100"></textarea>
+                  </div>
+                  <div class="col-2 d-flex flex-column align-items-center justify-content-center">
+                    Mic Btn
+                  </div>
+                </div>
+              </div>
           </MainCard>
         </div>
 
@@ -58,57 +81,140 @@ import MainCard from '~/components/Cards/MainCard.vue';
 import ListCard from '~/components/Cards/ListCard.vue';
 import DateDisplay from '~/components/utils/dateDisplay.vue';
 import ReadReceipt from '~/components/utils/readReceipt.vue';
+import ProfileImage from '~/components/utils/profileImage.vue';
+import SeeMore from '~/components/Icons/SeeMore.vue';
+import CallType from '~/components/utils/callType.vue';
+import MessageBubble from '~/components/ChatComponents/MessageBubble.vue';
 export default {
     name: "IndexPage",
-    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt }
+    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt, ProfileImage, SeeMore, CallType, MessageBubble },
+    data(){
+      return {
+        messageOpen:false,
+        state:{
+          class:{
+            messageClass:"col-lg-7 col-md-12 col-sm-12 message-area"
+          }
+        }
+      }
+    },
+    computed:{
+        messageArea(){
+          if(process.client){
+              let width = window.innerWidth;
+              if(width <= 768){
+
+              }else{
+                return 'col-lg-8 col-md-12 col-sm-12'
+              }
+          }else{
+            return 'col-lg-8 col-md-12 col-sm-12'
+          }
+
+        }
+    },
+    methods:{
+      toggleChat(){
+        this.messageOpen = true;
+         if(this.messageOpen){
+            this.state.class.messageClass =  'col-lg-8 col-md-12 col-sm-12 message-area message-open';
+          }else{
+            this.state.class.messageClass =  'col-lg-8 col-md-12 col-sm-12 message-area';
+          }
+      }
+    }
 }
 </script>
 <style scoped>
-  .main_column{
+  .message-area{
+    height:100%;
+  }
+
+  .message-area-head{
     display:flex;
-    flex-direction:column;
-    gap:30px;
+    align-items:center;
+    gap:18px;
+    height:10%;
+    border-bottom:0.1px solid rgba(0,0,0,0.2);
+  }
+  .message-area-heading{
+      font-size:1.25em;
+      font-weight:700;;
   }
 
-  .chat-actions{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
+  .message-description{
+    flex:1;
   }
 
-  .sml-list{
-    height:332px;
-    overflow:hidden;
+  .message-options{
+    margin-left:auto;
   }
 
-  .lrg-list{
+  .message-area-body{
     height:80%;
-    overflow:hidden;
-  }
-
-
-  .app-list > *:nth-child(even){
-    border-top:1px solid rgba(0,0,0,0.2);
-    border-bottom:1px solid rgba(0,0,0,0.2);
-
-  }
-
-  .app-list > *:nth-last-child(){
-    border-bottom:none;
-
-  }
-  .search-wrapper{
-    border-radius:var(--prim-curve);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background:white;
-  }
-  .search-input{
-    height:55px;
+    max-height:70vh;
     width:100%;
-    outline:none;
-    border-radius:10px;
-    padding-left:20px;
-    border:none;
-    background:white;
+    overflow-y:scroll;
+    overflow-x:hidden;
   }
+
+  .conversation-wrapper{
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+    padding:20px 14px;
+  }
+
+  .message-area-footer{
+    height:10%;
+  }
+
+  .message-input{
+    background:#E0E0E0;
+    height:50%;
+    outline:none;
+    border:none;
+    resize:none;
+    padding:5px 8px;
+    border-radius:var(--prim-curve)
+  }
+
+  .message-input::-webkit-scrollbar{
+    width:0.125em;
+  }
+
+  .message-input::-webkit-scrollbar-track{
+    width:0.125em;
+  }
+
+  .message-input::-webkit-scrollbar-thumb{
+    width:0.125em;
+    background:black;
+    border-radius:0px var(--prim-curve) var(--prim-curve) 0px;
+  }
+  @media(max-width:768px){
+    .message-area{
+      position:fixed;
+      top:0;
+      right:-100%;
+      z-index:5;
+      padding:0px;
+      z-index:9999;
+    }
+
+    .message-area-body{
+      max-height:80%;
+    }
+
+    .message-area .stretch{
+      border-radius:0px!important;
+      width:100%;
+    }
+
+    .message-open{
+      transform:translateX(-100%);
+
+    }
+  }
+
 </style>

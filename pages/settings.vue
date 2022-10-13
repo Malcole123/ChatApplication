@@ -47,51 +47,5 @@ export default {
 }
 </script>
 <style scoped>
-  .main_column{
-    display:flex;
-    flex-direction:column;
-    gap:30px;
-  }
 
-  .chat-actions{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-  }
-
-  .sml-list{
-    height:332px;
-    overflow:hidden;
-  }
-
-  .lrg-list{
-    height:80%;
-    overflow:hidden;
-  }
-
-
-  .app-list > *:nth-child(even){
-    border-top:1px solid rgba(0,0,0,0.2);
-    border-bottom:1px solid rgba(0,0,0,0.2);
-
-  }
-
-  .app-list > *:nth-last-child(){
-    border-bottom:none;
-
-  }
-  .search-wrapper{
-    border-radius:var(--prim-curve);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background:white;
-  }
-  .search-input{
-    height:55px;
-    width:100%;
-    outline:none;
-    border-radius:10px;
-    padding-left:20px;
-    border:none;
-    background:white;
-  }
 </style>

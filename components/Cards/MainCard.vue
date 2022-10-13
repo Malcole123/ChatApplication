@@ -2,14 +2,17 @@
   <div class="main-card" :class="size">
       <div class="card-head" v-if="!stdalone">
           <h2 class="card-title">{{heading}}</h2>
+          <SeeMore :width="4" :height="20"/>
       </div>
       <slot></slot>
   </div>
 </template>
 
 <script>
+import SeeMore from '../Icons/SeeMore.vue';
 export default {
-    props:['size', 'heading', 'stdalone']
+    props:['size', 'heading', 'stdalone'],
+    components:{ SeeMore }
 }
 </script>
 
@@ -25,6 +28,10 @@ export default {
 
     .lg{
       min-height:87vh;
+    }
+
+    .stretch{
+      height:100%;
     }
 
     .card-head{

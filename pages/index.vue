@@ -58,8 +58,13 @@
             <div class="w-100 lrg-list">
                       <div class="scrl-container app-list">
                         <ListCard v-for="n in 7" :key="'test' + n">
-                        <div class="w-100 chat-actions">
-
+                        <div class="w-100 chat-actions chat-actions-row">
+                          <span>
+                            <CallIndicator :type="'rejected'" :width="24" :height="24"/>
+                          </span>
+                          <span>
+                            <CallType :type="'video'" :width="24" :height="24"/>
+                          </span>
                         </div>
                         </ListCard>
                       </div>
@@ -78,9 +83,11 @@ import MainCard from '~/components/Cards/MainCard.vue';
 import ListCard from '~/components/Cards/ListCard.vue';
 import DateDisplay from '~/components/utils/dateDisplay.vue';
 import ReadReceipt from '~/components/utils/readReceipt.vue';
+import CallType from '~/components/utils/callType.vue';
+import CallIndicator from '~/components/utils/callIndicator.vue';
 export default {
     name: "IndexPage",
-    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt }
+    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt, CallType, CallIndicator }
 }
 </script>
 <style scoped>
@@ -94,6 +101,13 @@ export default {
     display:flex;
     flex-direction:column;
     align-items:flex-end;
+  }
+
+  .chat-actions-row{
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-end;
+    gap:20px;
   }
 
   .sml-list{
@@ -117,18 +131,5 @@ export default {
     border-bottom:none;
 
   }
-  .search-wrapper{
-    border-radius:var(--prim-curve);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    background:white;
-  }
-  .search-input{
-    height:55px;
-    width:100%;
-    outline:none;
-    border-radius:10px;
-    padding-left:20px;
-    border:none;
-    background:white;
-  }
+
 </style>

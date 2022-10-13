@@ -1,5 +1,5 @@
 <template>
-<div class="w-100 list-card bg-white">
+<div class="w-100 list-card bg-white" @click="()=>{this.$emit('click')}">
     <div class="row p-0 g-0">
       <div class="col-2">
         <div class="display-img"></div>
@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  emits:['click'],
   props:['name', 'body_text', 'img_']
 }
 </script>

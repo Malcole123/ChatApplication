@@ -17,8 +17,8 @@ export default {
       width:100%;
       min-height:100vh;
       padding-bottom:110px;
-      padding-left:20px;
-      padding-right:20px;
+      padding-left:10px;
+      padding-right:6px;
       display:flex;
       justify-content:center;
     }

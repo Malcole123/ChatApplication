@@ -1,12 +1,12 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center profile-img" :class="size">
+  <div class="d-flex justify-content-center align-items-center profile-img" :class="size" :style="`width:${width};height:${height}`">
     I
   </div>
 </template>
 
 <script>
 export default {
-    props:['size']
+    props:['size', 'width', 'height']
 }
 </script>
 

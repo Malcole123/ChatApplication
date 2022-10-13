@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="desktop-only">
-      <ProfileImage :size="'lg-profile'"/>
+      <ProfileImage :height="95" :width="95"/>
     </div>
       <ul class="nav-list">
         <li :class="activeLink('/')">
