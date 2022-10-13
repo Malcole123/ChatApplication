@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="app-wrapper">
       <Navbar/>
         <slot></slot>
     </div>
@@ -13,9 +13,14 @@ export default {
 </script>
 
 <style scoped>
-    .container-fluid{
-      min-height:100vh;
+    .app-wrapper{
       width:100%;
+      min-height:100vh;
       padding-bottom:110px;
+      padding-left:20px;
+      padding-right:20px;
+      display:flex;
+      justify-content:center;
     }
+
 </style>

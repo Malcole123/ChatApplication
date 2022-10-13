@@ -1,73 +1,36 @@
 <template>
   <MainWrapper>
       <div class="row w-100 main-row g-0 gap-0">
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <div class="w-100 main_column">
+        <div class="col-12 mb-4">
+            <div class="w-100 main_column">
               <div class="search-wrapper">
                 <input type="text" name="search" id="search-input-1" class="w-100 search-input" placeholder="Search messages, calls, friends...">
               </div>
-                <!---->
-                <MainCard :size="'sml'" :heading="'Groups'">
-                  <div class="w-100 sml-list">
-                      <div class="scrl-container app-list">
-                        <ListCard v-for="n in 3" :key="'test' + n">
-                        <div class="w-100 chat-actions">
-                          <DateDisplay :date="1665590154" :format="'relative'"/>
-                          <ReadReceipt state='active'/>
-                        </div>
-                        </ListCard>
-                      </div>
-
-                    </div>
-                </MainCard>
-                <MainCard :size="'sml'" :heading="'Recents'">
-                    <div class="w-100 sml-list">
-                      <div class="scrl-container app-list">
-                        <ListCard v-for="n in 3" :key="'test' + n">
-                        <div class="w-100 chat-actions">
-                          <DateDisplay :date="1665590154" :format="'relative'"/>
-                          <ReadReceipt state='active'/>
-                        </div>
-                        </ListCard>
-                      </div>
-
-                    </div>
-                </MainCard>
-
-          </div>
+            </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
+          <MainCard :size="'lg'" :heading="'Profile Settings'">
+            <div class="w-100 lrg-list">
+                      <div class="scrl-container app-list">
+
+                      </div>
+
+            </div>
+          </MainCard>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
           <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
           <MainCard :size="'lg'" :heading="'Friends'">
             <div class="w-100 lrg-list">
                       <div class="scrl-container app-list">
-                        <ListCard v-for="n in 7" :key="'test' + n">
-                        <div class="w-100 chat-actions">
-                          <DateDisplay :date="1665590154" :format="'relative'"/>
 
-                        </div>
-                        </ListCard>
                       </div>
 
             </div>
           </MainCard>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
-          <MainCard :size="'lg'" :heading="'Recent Calls'">
-            <div class="w-100 lrg-list">
-                      <div class="scrl-container app-list">
-                        <ListCard v-for="n in 7" :key="'test' + n">
-                        <div class="w-100 chat-actions">
 
-                        </div>
-                        </ListCard>
-                      </div>
-
-            </div>
-
-          </MainCard>
-        </div>
       </div>
   </MainWrapper>
 </template>

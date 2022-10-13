@@ -36,38 +36,18 @@
 
           </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="col-lg-8 col-md-12 col-sm-12">
           <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
           <MainCard :size="'lg'" :heading="'Friends'">
             <div class="w-100 lrg-list">
                       <div class="scrl-container app-list">
-                        <ListCard v-for="n in 7" :key="'test' + n">
-                        <div class="w-100 chat-actions">
-                          <DateDisplay :date="1665590154" :format="'relative'"/>
 
-                        </div>
-                        </ListCard>
                       </div>
 
             </div>
           </MainCard>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <div class="pt-2 pb-3 d-lg-none d-md-block d-sm-block"></div>
-          <MainCard :size="'lg'" :heading="'Recent Calls'">
-            <div class="w-100 lrg-list">
-                      <div class="scrl-container app-list">
-                        <ListCard v-for="n in 7" :key="'test' + n">
-                        <div class="w-100 chat-actions">
 
-                        </div>
-                        </ListCard>
-                      </div>
-
-            </div>
-
-          </MainCard>
-        </div>
       </div>
   </MainWrapper>
 </template>
