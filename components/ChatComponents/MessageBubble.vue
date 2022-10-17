@@ -24,12 +24,12 @@ export default {
 
 <style scoped>
     .message-bubble{
-      --msg-bg:#CFCFCF;
+      --msg-bg:#e4e4e4;
       --sndr-bg:#1A66FF;
       width:fit-content;
       max-width:60%;
       height:fit-content;
-      font-weight:bold;
+      font-weight:500;
       padding:6px 10px 6px 15px;
       position:relative;
       border-radius:var(--prim-curve);

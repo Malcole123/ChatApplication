@@ -1,12 +1,22 @@
 <template>
   <div class="d-flex justify-content-center align-items-center profile-img" :class="size" :style="`width:${width};height:${height}`">
-    I
+    {{namePreview.short}}
   </div>
 </template>
 
 <script>
 export default {
-    props:['size', 'width', 'height']
+    props:['size', 'width', 'height', 'desc'],
+    computed:{
+      namePreview(){
+        if(!this.desc){return ''}
+        let short = this.desc.length > 1 ? this.desc.substr(0,1) : '';
+        return {
+          short,
+          all:this.desc
+        }
+      }
+    }
 }
 </script>
 

@@ -41,7 +41,7 @@
           <MainCard :size="'lg'" :heading="'Friends'">
             <div class="w-100 lrg-list">
                       <div class="scrl-container app-list">
-                        <ListCard v-for="n in 7" :key="'test' + n">
+                        <ListCard v-for="(f,index) in userSummary.friends" :key="'friend-list' + index">
                         <div class="w-100 chat-actions">
                           <DateDisplay :date="1665590154" :format="'relative'"/>
 
@@ -87,7 +87,14 @@ import CallType from '~/components/utils/callType.vue';
 import CallIndicator from '~/components/utils/callIndicator.vue';
 export default {
     name: "IndexPage",
-    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt, CallType, CallIndicator }
+    components: { MainWrapper, MainCard, ListCard, DateDisplay, ReadReceipt, CallType, CallIndicator },
+    middleware:'auth',
+    computed:{
+      userSummary(){
+        let me = this.$store.state.auth.user;
+        return me;
+      }
+    }
 }
 </script>
 <style scoped>

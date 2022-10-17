@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="desktop-only">
-      <ProfileImage :height="95" :width="95"/>
+      <ProfileImage :height="95" :width="95" :desc="fname"/>
     </div>
       <ul class="nav-list">
         <li :class="activeLink('/')">
@@ -36,7 +36,7 @@
           </NuxtLink>
         </li>
       </ul>
-      <div class="nav-link desktop-only">
+      <div class="nav-link desktop-only" @click="()=>{this.$auth.logout()}">
         <ReturnIcon :height="32" :width="32" :theme="'light'"/>
       </div>
   </nav>
@@ -50,6 +50,7 @@ import NotificationIcon from './Icons/NotificationIcon.vue';
 import SettingsIcon from './Icons/SettingsIcon.vue';
 import ReturnIcon from './Icons/ReturnIcon.vue';
 export default {
+    props:['fname'],
     components:{ ProfileImage, HomeIcon, MessageIcon, NotificationIcon, SettingsIcon, ReturnIcon },
     methods:{
       activeLink(path_){

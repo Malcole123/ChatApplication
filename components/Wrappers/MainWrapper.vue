@@ -1,6 +1,6 @@
 <template>
     <div class="app-wrapper">
-      <Navbar/>
+      <Navbar :fname="user.name.first"/>
         <slot></slot>
     </div>
 </template>
@@ -8,7 +8,17 @@
 <script>
 import Navbar from '../Navbar.vue';
 export default {
-    components: { Navbar }
+    components: { Navbar },
+    data(){
+      return {
+
+      }
+    },
+    computed:{
+      user(){
+        return this.$store.state.auth.user
+      }
+    }
 }
 </script>
 

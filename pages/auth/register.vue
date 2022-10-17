@@ -23,17 +23,20 @@
       </b-form-group>
 
       <b-form-group
-        id="input-group-1"
+        id="input-group-8"
         label="Email address:"
-        label-for="input-1"
+        label-for="input-8"
         description="We'll never share your email with anyone else."
+        :state="authErrors.email"
+        :invalid-feedback="emailFeedback"
       >
         <b-form-input
-          id="input-1"
+          id="input-8"
           v-model="form.email"
           type="email"
           placeholder="Enter email"
           required
+          :state="authErrors.email"
         ></b-form-input>
       </b-form-group>
 
@@ -70,17 +73,31 @@ export default {
           lname:"",
           password:"",
           email:"",
-
+        },
+        authErrors:{
+          email:null,
         }
       }
     },
     methods:{
-      onSubmit(){
-          this.$store.dispatch('user/signup',this.form)
+      async onSubmit(){
+          let res_ = await this.$store.dispatch('user/signup',this.form);
+          if(res_.data.ok){
+            this.$router.push('/');
+          }else{
+            this.authErrors.email = false;
+          }
       },
       onReset(){
         alert('run')
       }
+    },
+    computed:{
+      emailFeedback(){
+        if(this.authErrors.email=== false){
+          return 'Your email has already been registered !'
+        }
+      },
     }
 }
 </script>

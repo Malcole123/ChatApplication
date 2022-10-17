@@ -1,15 +1,25 @@
-import { Schema } from 'mongoose'
+import mongoose from 'mongoose';
+import { db } from '.';
+const { Schema } = mongoose;
 
 
-const User = new Schema({
-    name:{
-      first:String,
-      last:String,
-    },
+const UserSchema = new Schema({
+    fname:String,
+    lname:String,
+    fullname:String,
     email:String,
-    username:String,
     password:String,
+    friends:Array
 })
 
+UserSchema.methods.getFriendSummary = ()=>{
+  let use = db.user.find();
+  use.$where(()=>{
+    this.friends.includes(this._id)
+  });
+  console.log(use)
+  return use
+}
 
-export default User
+
+export default UserSchema

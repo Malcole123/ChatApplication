@@ -60,11 +60,18 @@
               </div>
               <div class="w-100 message-area-footer">
                 <div class="row h-100 g-2">
-                  <div class="col-10 d-flex flex-column align-items-center justify-content-center">
+                  <div class="col-10 h-100 d-flex flex-column align-items-center justify-content-center">
                     <textarea name="userMessage" id="messageInput" class="message-input w-100"></textarea>
                   </div>
-                  <div class="col-2 d-flex flex-column align-items-center justify-content-center">
-                    Mic Btn
+                  <div class="col-2 h-100 d-flex flex-column align-items-center justify-content-center">
+                    <div class="row h-100">
+                      <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column align-items-center justify-content-center">
+                        Camera
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column align-items-center justify-content-center">
+                        Mic
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -167,6 +174,7 @@ export default {
 
   .message-area-footer{
     height:10%;
+    border-top:0.1px solid rgba(0,0,0,0.2);
   }
 
   .message-input{
