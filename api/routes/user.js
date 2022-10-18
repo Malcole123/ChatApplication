@@ -3,7 +3,7 @@ const router = Router();
 import { db } from '../models';
 import jwt from 'jsonwebtoken';
 const authConfig = {
-  secret:'lkkjfkdfjdkj12122'
+  secret:process.env.NUXT_APP_LOCAL_USER_DATA
 }
 //Middlewares
 const tokenMiddleware = (req, res, next)=>{

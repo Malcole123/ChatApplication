@@ -4,7 +4,7 @@ import { db } from '../models';
 import bcrypt  from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const authConfig = {
-  secret:'lkkjfkdfjdkj12122'
+  secret:process.env.NUXT_APP_LOCAL_USER_DATA
 }
 //Middlewares
 const checkDuplicateSignUp = async (req, res, next)=>{
