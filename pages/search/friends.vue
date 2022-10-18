@@ -23,7 +23,7 @@
                         {{item.email}}
                       </b-card-text>
 
-                      <b-button href="#" variant="primary">Add Friend</b-button>
+                      <b-button variant="primary" @click="addFriend(item._id, item.fname)">Add Friend</b-button>
                     </b-card>
                 </div>
             </div>
@@ -109,11 +109,40 @@ export default {
           ret.search.full = this.search.input;
           return ret
       },
-      async addFriend(email){
-        let add_ = await this.$store.state.commit('user/addFriend', {
-          email
-        });
-        console.log(add_)
+      async addFriend(id, name){
+        await this.$axios.post('/api/user/friend/request', {
+          requestType:'friends',
+          toUser:id,
+        }).then(data=>{
+          if(data.status === 200){
+           this.userNotify({
+            message:`Your friend request has been sent to ${name}. We'll let you know when they accept.`,
+            title:'Your friend request has been sent',
+            aHideDelay:5000,
+           })
+          }else{
+            this.userNotify({
+              message:data.message,
+              title:"Oh no.",
+              aHideDelay:6000,
+            })
+          }
+          return data;
+        }).catch(err=>{
+          this.userNotify({
+              message:'Something went wrong please try again later',
+              title:"Oh no.",
+              aHideDelay:6000,
+          })
+        })
+
+      },
+      userNotify({message,title, aHideDelay}){
+        this.$bvToast.toast(message, {
+              title,
+              autoHideDelay:aHideDelay || 5000,
+              appendToast:true
+        })
       }
       //State Cntrls
     },

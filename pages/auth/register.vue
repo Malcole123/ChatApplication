@@ -82,8 +82,14 @@ export default {
     methods:{
       async onSubmit(){
           let res_ = await this.$store.dispatch('user/signup',this.form);
-          if(res_.data.ok){
-            this.$router.push('/');
+          if(res_.ok){
+            let lgin = await this.$auth.loginWith('local', {
+            data:{
+              email:this.form.email,
+              password:this.form.password,
+            }
+          })
+          this.$router.push("/");
           }else{
             this.authErrors.email = false;
           }

@@ -26,6 +26,50 @@ const checkDuplicateSignUp = async (req, res, next)=>{
     })
 }
 
+const tokenMiddleware = (req, res, next)=>{
+  let token = req.headers.authorization.replace('Bearer ', '');
+  try{
+    let vToken = jwt.verify(token, authConfig.secret);
+    req.userData = {
+      token,
+      uid:vToken.id,
+      name:vToken.name,
+      email:vToken.email,
+      tokenOk:true,
+    };
+    next()
+  }catch(err){
+    res.status(403).send({message:'Not authorized', ok:false})
+  }
+}
+
+
+router.get('/me', tokenMiddleware, async(req,res)=>{
+  let uid = req.userData.uid;
+  let token = req.userData.token;
+  let tokenOk = req.userData.tokenOk;
+  //Dep-- Unnecessary
+  db.user.findOne({
+    _id:uid,
+  }).exec((err,user)=>{
+    if(!user || err){
+      res.send({message:"User not found", ok:false});
+      return
+    }
+    const { email, fname, lname , friends} = user;
+    res.json({
+        authToken:token,
+        user:{
+          name:{
+            first:fname,
+            last:lname,
+          },
+          email,
+          friends,
+        }
+    })
+  })
+})
 
 
 
@@ -44,7 +88,7 @@ router.post("/signup",checkDuplicateSignUp, async (req,res)=>{
       res.send({message:"Something went wrong", err, ok:false});
       return
     }
-    res.send({
+    res.json({
       ok:true,
       message:"User registered successfully",
       authToken:"",
@@ -75,7 +119,7 @@ router.post('/login', async(req,res)=>{
         res.send({message:"invalid password",ok:false,authError:true});
         return
     }
-    var token = jwt.sign({id:user._id}, authConfig.secret, {
+    var token = jwt.sign({id:user._id, name:user.fullname, email:user.email}, authConfig.secret, {
       expiresIn:86400 // 24 Hrs
     })
     const { email, fname, lname, } = user;

@@ -12,14 +12,5 @@ const UserSchema = new Schema({
     friends:Array
 })
 
-UserSchema.methods.getFriendSummary = ()=>{
-  let use = db.user.find();
-  use.$where(()=>{
-    this.friends.includes(this._id)
-  });
-  console.log(use)
-  return use
-}
-
 
 export default UserSchema

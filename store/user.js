@@ -18,36 +18,24 @@ const getters = {
 }
 
 const mutations = {
-    addFriend(state, {email}){
-      let f_ = state.$auth.user.friends;
+    async addFriend(state, {email}){
+      let f_ = this.$auth.user.friends;
       let present_ = [...f_].find((item,index)=>{
-        if(item.email === email){
+        if(item === email){
           return item
         }
       });
-      if(!present_){
+      console.log(present_)
+      if(present_){
         return
       }
-      f_.push(email)
-      //Make api call
-      const {data , err} = this.$axios.post('/api/user/friends/add', {
-        friends:f_,
-        email,
-      }).then(data=>{return data}).catch(err=>{
-        return err
+      f_.push(email);
+      let res_ = await state.$store.dispatch('syncFriendDB',{
+        friends:f_
       });
-      if(err){
-        return {
-          ok:false
-        }
-      }else{
-        state.$auth.user.friends = data.user.friends
-      }
-
-
+      console.log(res_)
+      return res_
     }
-
-
 }
 
 
@@ -59,7 +47,7 @@ const actions = {
         fname,
         lname,
         password,
-      }).then(data=>{return data.data}).catch(err=>{
+      }).then(data=>{return data}).catch(err=>{
         return {
           ok:false,
           message:err,
@@ -84,6 +72,18 @@ const actions = {
             ok:false
           }
         }
+    },
+    async syncFriendDB(state, {friends}){
+        //Make api call
+        const res = await this.$axios.post('/api/user/friends/sync', {
+          friends,
+        }).then(data=>{return data}).catch(err=>{
+          console.log(err)
+          return err
+        });
+      console.log(res);
+      return res;
+
     },
 
 }

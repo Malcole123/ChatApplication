@@ -11,6 +11,14 @@
             </div>
           </NuxtLink>
         </li>
+        <!--Link Here-->
+        <li :class="activeLink('/search/friends')">
+          <NuxtLink to="/search/friends">
+            <div class="nav-icon">
+              <AddFriend :height="32" :width="32" :theme="'light'"/>
+            </div>
+          </NuxtLink>
+        </li>
         <!---Link Here-->
         <li :class="activeLink('/messages')">
           <NuxtLink to="/messages">
@@ -49,9 +57,10 @@ import MessageIcon from './Icons/MessageIcon.vue';
 import NotificationIcon from './Icons/NotificationIcon.vue';
 import SettingsIcon from './Icons/SettingsIcon.vue';
 import ReturnIcon from './Icons/ReturnIcon.vue';
+import AddFriend from './Icons/AddFriend.vue'
 export default {
     props:['fname'],
-    components:{ ProfileImage, HomeIcon, MessageIcon, NotificationIcon, SettingsIcon, ReturnIcon },
+    components:{ ProfileImage, HomeIcon, MessageIcon, NotificationIcon, SettingsIcon, ReturnIcon, AddFriend },
     methods:{
       activeLink(path_){
           if(this.$route.path === path_){

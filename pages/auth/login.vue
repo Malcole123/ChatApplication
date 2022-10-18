@@ -42,6 +42,9 @@
         <div class="w-100">
           <b-button type="submit" variant="dark" class="w-100">Sign Up</b-button>
         </div>
+        <div class="w-100 mt-3">
+          <p>Don't have an account ? <NuxtLink to="/auth/register">Sign up here</NuxtLink></p>
+        </div>
 
       </b-form>
     </div>
