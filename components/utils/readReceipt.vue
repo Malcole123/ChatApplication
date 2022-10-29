@@ -1,0 +1,29 @@
+<template>
+  <div class="icon">
+    <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.22175 21.2696L22.3198 9.32297" :stroke="appearance" stroke-width="2"/>
+    <path d="M9.24224 21.7731L6.99995 19.0047" :stroke="appearance" stroke-width="2"/>
+    <path d="M5.56779 18.3476L19.9999 5.99998" :stroke="appearance" stroke-width="2"/>
+    <line x1="6.78934" y1="18.2919" x2="1.76732" y2="12.0646" :stroke="appearance" stroke-width="2"/>
+    </svg>
+  </div>
+</template>
+
+<script>
+export default {
+  props:['state'],
+  computed:{
+    appearance(){
+      if(this.state === 'active'){
+        return "#00D0FF"
+      }else{
+        return '#A4A4A4'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>
