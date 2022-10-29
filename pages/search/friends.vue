@@ -50,8 +50,6 @@ export default {
         if(data.ok){
           this.search.results = data.data;
         }
-        console.log(err)
-        console.log(data)
         this.isFetching = false;
       },
       searchBreakdown(){
